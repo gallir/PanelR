@@ -1,0 +1,92 @@
+body {
+font-family: sans-serif;
+min-width: 780px;
+}
+ 
+a {
+	text-decoration: none;
+}
+.header {
+	text-align: right;
+	background-color: #cacaff;
+	margin: 0 0 15px 0;
+	padding: 5px;
+}
+
+/* Overlay */
+
+#modalOverlay {
+  background-color:#000;
+  cursor:wait;
+}
+
+#modalContainer {
+/*
+  height:400px;
+ */
+  width:300px;
+  margin-left:-150px;
+  padding: 5px;
+  left:50%;
+  top:25%;  
+  background-color:#fff;
+  border:3px solid #ccc;
+}
+/*
+#modalContainer a.modalCloseImg {
+  background:url(../img/x.png) no-repeat;
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-14px;
+  right:-18px;
+  cursor:pointer;
+}
+*/
+
+// Panel classes
+
+.panel {
+	margin: 10px 10px 10px 10px;
+}
+
+.panel-item {
+	width: 100%;
+	clear: both;
+	border-bottom: 1px solid #167805;
+	padding: 5px 0 5px 0;
+	text-align: center;
+	overflow: hidden;
+	font-size: 80%;
+}
+
+.panel-ts, .panel-type, .panel-text, .panel-who, .panel-service {
+	float: left;
+	display: block;
+	overflow: hidden;
+}
+
+.panel-ts {
+	width: 8%;
+	text-align: left;
+}
+
+.panel-text {
+	width: 66%;
+	text-align: left;
+}
+
+.panel-who {
+	width: 12%;
+}
+
+.panel-service {
+	width: 10%;
+}
+
+.panel-type {
+	width: 3%;
+	text-align: right;
+}

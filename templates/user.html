@@ -1,0 +1,32 @@
+{% include "header.html" %}
+
+{% if user %}
+
+<h2>Panels</h2>
+	<ul>
+	{% for panel in panels %}
+	<li><a href="/{{user.nick}}/panel/{{panel.name}}"><strong>/{{user.nick}}/panel/{{panel.name}}</strong></a>
+	</li>
+	</ul>
+
+	<h2>Services</h2>
+		<ul>
+		<li><a href="javascript:newService('url', 'rss', 'Specify the feed\'s url')">add RSS</a></li>
+		{#<li><a href="javascript:newService('friendfeed', 'friendfeed', 'User and remote key')">add Friendfeed</a></li>#}
+		<li><a href="javascript:newService('user', 'twitxr', 'Twitxr user')">add Twitxr friends's timeline</a></li>
+		</ul>
+		<ul>
+		{% for s in services %}
+			<li id="{{s.key}}">{{s.panel.name}}: {% if s.s_url %}<a href="{{s.s_url}}">{{s.type}}</a>{% else %}{{s.type}}{% endif %}::{{s.s_title}} ({{s.type}}) <a href="javascript:opService('delete', '{{s.key}}')">delete</a></li>
+		{% endfor %}
+		</ul>
+
+{% endfor %} 
+{% endif %}
+
+  
+{% include "dialog_templates.html" %}
+
+
+
+{% include "footer.html" %}

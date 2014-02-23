@@ -1,0 +1,24 @@
+{% include "header.html" %}
+
+<div>
+{{ greeting|escape }}
+</div>
+
+
+<h1>PanelR</h1>
+
+<p>We just started the development of PanelR --pronounced <em>panel er</em> as in <em>propeller</em>--. 
+PanelR runs on, and is optimized for, Google App Engine. This is not even a pre Alfa version, so we don't
+send invitations... yet</p>
+
+
+
+{% if user  %}
+	<div>
+	<a href="/{{ user.nick }}">User home</a>
+	</div>
+{% endif %}
+<div>
+
+
+{% include "footer.html" %}

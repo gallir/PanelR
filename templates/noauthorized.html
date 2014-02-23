@@ -1,0 +1,12 @@
+{% include "header.html" %}
+
+<div>
+{{ greeting|escape }}
+</div>
+{% if user %}
+<div>
+<strong><a href="{{ logout_link }}">logout</a></strong>
+</div>
+{% endif %}
+
+{% include "footer.html" %}

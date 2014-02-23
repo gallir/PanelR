@@ -1,0 +1,103 @@
+{% include "header.html" %}
+
+<script type="text/javascript">
+//<![CDATA[
+var my_version = 1;
+var ts = 1000000; 
+var server_name = 'panel';
+var max_items = 25;
+var panel_base_url = '{{ panel_path }}/json/'+max_items;
+{% ifequal user owner %}
+var do_check_service = true;
+var services_check_url = '/{{ owner.nick }}/services/panel_check/{{ panel_key }}';
+{% else %}
+var do_check_service = false;
+{% endifequal %}
+
+var mykey = 10000;
+
+var do_animation = false;
+
+$(function(){start_panel()});
+
+function set_initial_display(item, i) {
+	item.children().hide();
+	item.children().fadeIn('normal');
+}
+
+function to_html(data) {
+	var tstamp=new Date(data.ts*1000);
+	var timeStr;
+
+	var hours = tstamp.getHours();
+	var minutes = tstamp.getMinutes();
+	var seconds = tstamp.getSeconds();
+
+	timeStr  = ((hours < 10) ? "0" : "") + hours;
+	timeStr  += ((minutes < 10) ? ":0" : ":") + minutes;
+	timeStr  += ((seconds < 10) ? ":0" : ":") + seconds;
+
+	html = '<div class="panel-ts">'+timeStr+'<\/div>';
+	html += '<div class="panel-text">'
+	if (data.url != null) {
+		html += '<a href="'+data.url+'" target="_blank">'+data.text+'<\/a>';
+	} else {
+		html += data.text;
+	}
+	html += '<\/div>';
+	if (data.icon != null) {
+		html += '<div class="panel-who"><img src="'+data.icon+'" alt="" title="'+data.user+'" width="20" height="20"/><\/div>';
+	} else {
+			html += '<div class="panel-who">'+clean_undefined(data.user)+'<\/div>';
+	}
+	html += '<div class="panel-service">'+clean_undefined(data.service)+'<\/div>';
+	html += '<div class="panel-type">'+data.type+'<\/div>';
+	/*
+	if ("undefined" != typeof(data.cid) && data.cid > 0) anchor='#c-'+data.cid;
+	else anchor='';
+	*/
+	return html;
+}
+
+function clean_undefined(str) {
+	if ( typeof(str) == 'undefined' || str == null || str.length == 0)
+		return "&nbsp;";
+	else
+		return str;
+
+}
+//]]>
+</script>
+<script type="text/javascript" src="/static/js/panel.js"></script>
+
+<h2><a href="{{panel_path}}">{{panel_path}}</a></h2>
+
+<div class="panel">
+<form name="chat_form" onsubmit="return send_chat(this);">
+	Message: <input type="text" name="comment" id="comment-input" value="" size="90" maxlength="230" autocomplete="off" />
+	<input type="submit" value="send"/>
+</form>
+
+<div class="panel-item">
+	<div class="panel-ts"><strong>time</strong></div>
+	<div class="panel-text"><strong>text</strong></div>
+	<div class="panel-who"><strong>who</strong></div>
+	<div class="panel-service"><strong>service</strong></div>
+	<div class="panel-type">&nbsp;</div>
+</div>
+
+	<div id="panel-items">
+	{% for event in events %}
+	<div class="panel-item">
+		<div class="panel-ts">&nbsp;</div> 
+		<div class="panel-text">&nbsp;</div>
+		<div class="panel-who">&nbsp;</div>
+		<div class="panel-service">&nbsp;</div>
+		<div class="panel-type">&nbsp;</div>
+	</div>
+	{% endfor %}
+	</div>
+
+</div> 
+</div>
+{% include "footer.html" %}
